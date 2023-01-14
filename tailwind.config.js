@@ -1,3 +1,4 @@
+const plugin = require("tailwindcss/plugin");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -6,7 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Source Sans Pro", "sans-serif", "system-ui"],
+        mono: ["IBM Plex Sans", "ui-monospace"],
+      },
       colors: {
+        primary: {
+          DEFAULT: "#F7F7FB",
+          200: "#E8E8F8",
+          300: "#BFBFE3",
+        },
         yellow: {
           50: "#FFF8E5",
           100: "#FFF1CC",
@@ -22,5 +32,17 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      const utilities = {
+        ".bg-hero": {
+          "background-image": "url(/hero-img.png)",
+        },
+        ".shadow-card": {
+          "box-shadow": "0px 15px 30px rgba(0,0,0,0.1)",
+        },
+      };
+      addUtilities(utilities);
+    }),
+  ],
 };
